@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3D Biomechanical Multi-Person Coach</title>
+  <link rel="stylesheet" href="/static/style.css" />
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+    }
+  }
+  </script>
+</head>
+<body>
+  <header class="header">
+    <div class="brand">
+      <h1>3D Biomechanical Coach</h1>
+      <p>Multi-person pose · joint angles · real-time feedback · <a href="/mobile" style="color:#3fb950">Mobile app →</a></p>
+    </div>
+    <div class="controls">
+      <label for="exercise">Exercise</label>
+      <select id="exercise">
+        <option value="squat">Squat</option>
+        <option value="pushup">Push-up</option>
+        <option value="plank">Plank</option>
+        <option value="lunge">Lunge</option>
+        <option value="posture">Standing Posture</option>
+      </select>
+      <div class="source-tabs">
+        <button type="button" class="tab active" data-source="camera">Camera</button>
+        <button type="button" class="tab" data-source="upload">Upload Video</button>
+      </div>
+      <div id="cameraControls" class="source-controls">
+        <button id="btnStart" class="btn primary">Start Camera</button>
+        <button id="btnStop" class="btn" disabled>Stop</button>
+      </div>
+      <div id="uploadControls" class="source-controls hidden">
+        <input type="file" id="videoFile" accept="video/*" hidden />
+        <button type="button" id="btnPickVideo" class="btn">Choose Video</button>
+        <button type="button" id="btnAnalyze" class="btn primary" disabled>Analyze Video</button>
+        <span id="fileName" class="file-name">No file selected</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="grid">
+    <section class="panel camera-panel">
+      <h2 id="feedTitle">Live Feed</h2>
+      <div class="video-wrap">
+        <video id="video" autoplay playsinline muted controls></video>
+        <img id="overlay" alt="Annotated feed" />
+        <canvas id="capture" hidden></canvas>
+      </div>
+      <div id="videoProgress" class="video-progress hidden">
+        <div class="progress-bar"><div id="progressFill" class="progress-fill"></div></div>
+        <span id="progressText">Analyzing… 0%</span>
+      </div>
+      <div id="playbackBar" class="playback-bar hidden">
+        <input type="range" id="seekBar" min="0" max="100" value="0" step="0.1" />
+        <span id="timeLabel">0:00 / 0:00</span>
+      </div>
+      <p id="status" class="status">Use Camera or upload a video to analyze posture</p>
+    </section>
+
+    <section class="panel scene-panel">
+      <h2>3D Skeleton View</h2>
+      <div id="threeContainer"></div>
+    </section>
+
+    <section class="panel metrics-panel">
+      <h2>Coaching Feedback</h2>
+      <div id="videoSummary" class="video-summary hidden"></div>
+      <div id="peopleCards" class="people-cards">
+        <p class="placeholder">No people detected yet. Step into frame.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>Up to 4 people · MediaPipe Pose · WebSocket streaming</span>
+  </footer>
+
+  <script type="module" src="/static/app.js"></script>
+</body>
+</html>

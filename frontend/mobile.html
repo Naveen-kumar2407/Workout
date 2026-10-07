@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#0d1117" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Posture Coach" />
+  <title>Posture Coach</title>
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="/static/icons/icon-192.png" />
+  <link rel="stylesheet" href="/static/mobile.css" />
+</head>
+<body>
+  <div id="loader" class="loader">
+    <div class="spinner"></div>
+    <p id="loaderText">Loading AI model…</p>
+  </div>
+
+  <div id="secureBanner" class="secure-banner hidden"></div>
+
+  <div id="installBanner" class="install-banner hidden">
+    <span>Install app on home screen</span>
+    <button type="button" id="btnInstall" class="btn sm">Install</button>
+  </div>
+
+  <header class="app-header">
+    <h1>Posture Coach</h1>
+    <select id="exercise" aria-label="Exercise">
+      <option value="squat">Squat</option>
+      <option value="pushup">Push-up</option>
+      <option value="plank">Plank</option>
+      <option value="lunge">Lunge</option>
+      <option value="posture">Posture</option>
+    </select>
+  </header>
+
+  <main class="app-main">
+    <section id="panel-camera" class="tab-panel active">
+      <div class="camera-wrap">
+        <video id="video" playsinline muted></video>
+        <canvas id="canvas"></canvas>
+        <div class="score-overlay">
+          <div id="scoreRing" class="score-ring">
+            <span id="scoreValue">—</span>
+          </div>
+          <span class="score-label">Form</span>
+        </div>
+      </div>
+      <p id="status" class="status">Ready</p>
+      <div class="actions">
+        <button type="button" id="btnStart" class="btn primary block">Start Camera</button>
+        <button type="button" id="btnStop" class="btn block" disabled>Stop</button>
+        <button type="button" id="btnFlip" class="btn block">Flip Camera</button>
+      </div>
+    </section>
+
+    <section id="panel-feedback" class="tab-panel">
+      <h2>Coaching</h2>
+      <ul id="feedbackList" class="feedback-list">
+        <li class="empty">Start camera to get feedback</li>
+      </ul>
+      <div id="angleChips" class="chips"></div>
+    </section>
+
+    <section id="panel-video" class="tab-panel">
+      <h2>Video Analysis</h2>
+      <p class="hint">Upload a workout video from your gallery.</p>
+      <input type="file" id="videoInput" accept="video/*" hidden />
+      <button type="button" id="btnPick" class="btn primary block">Choose Video</button>
+      <div id="videoReport" class="video-report"></div>
+    </section>
+  </main>
+
+  <nav class="bottom-nav">
+    <button type="button" class="nav-tab active" data-tab="camera">📷 Camera</button>
+    <button type="button" class="nav-tab" data-tab="feedback">💬 Coach</button>
+    <button type="button" class="nav-tab" data-tab="video">🎬 Video</button>
+  </nav>
+
+  <script type="module" src="/static/js/mobile-app.js"></script>
+</body>
+</html>

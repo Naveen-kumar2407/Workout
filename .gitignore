@@ -1,0 +1,34 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Environment and sensitive data
+.env
+.env.*
+!.env.example
+
+# Local SSL certificates
+certs/
+*.pem
+*.key
+*.crt
+
+# Downloaded models (auto-downloaded at runtime)
+models/*.task
+!models/.gitkeep
+
+# IDEs and OS
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+.DS_Store
+Thumbs.db
